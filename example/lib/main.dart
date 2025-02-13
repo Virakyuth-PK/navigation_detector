@@ -20,9 +20,24 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> checkNavigationMode() async {
-    String mode = await NavigationDetector.getNavigationMode();
+    NavigationDetectorEnumMode mode =
+        await NavigationDetector.getNavigationMode();
+    switch (mode) {
+      case NavigationDetectorEnumMode.gesture:
+        print("Gesture navigation detected");
+        break;
+      case NavigationDetectorEnumMode.buttons:
+        print("Button navigation detected");
+        break;
+      case NavigationDetectorEnumMode.unsupported:
+        print("Unsupported navigation mode");
+        break;
+      case NavigationDetectorEnumMode.error:
+        print("Error detecting navigation mode");
+        break;
+    }
     setState(() {
-      navigationMode = mode;
+      navigationMode = mode.name;
     });
   }
 
